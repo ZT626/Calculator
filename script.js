@@ -154,6 +154,8 @@ buttons.macro.operators.forEach((button) => {
      * ? at the end it should put (a) = answer and b null and then Operator changes to this operator
      */
     if (e.target.textContent === "=") {
+      console.log("1");
+
       if (a !== null && operator !== null) {
         b = parseFloat(displayValue);
 
@@ -165,8 +167,33 @@ buttons.macro.operators.forEach((button) => {
         b = null;
         operator = null;
       } else {
+        console.log("2");
         a = parseFloat(display.big.textContent);
         display.small.textContent = `${a} =`;
+      }
+    }
+
+    if (e.target.textContent !== "=") {
+      if (a !== null && operator !== null) {
+        console.log("3");
+        b = parseFloat(displayValue);
+        let result = calculations(a, b, e.target.textContent);
+
+        // this is irrelevant change but it helps me flow with the code better
+        display.small.textContent = `${a} ${operator} ${b} =`;
+        display.big.textContent = result;
+
+        a = result;
+        b = null;
+        operator = e.target.textContent;
+        display.small.textContent = `${a} ${operator}`;
+        display.big.textContent = 0
+      } else {
+        console.log("4");
+        a = displayValue;
+        operator = e.target.textContent;
+        display.small.textContent = `${a} ${operator}`;
+        display.big.textContent = 0;
       }
     }
   });
@@ -177,6 +204,9 @@ buttons.macro.operators.forEach((button) => {
  */
 
 function calculations(a, b, operation) {
+  //jus in case ik myself too well
+  a = parseFloat(a);
+  b = parseFloat(b);
   switch (operation) {
     case "+":
       return a + b;
@@ -191,4 +221,15 @@ function calculations(a, b, operation) {
       return a / b;
       break;
   }
+}
+
+
+// a cool little delete last function that will never eva be used lol
+function supaSecretDel () {
+    console.log('IF YOUR SEEING THIS IN YOUR CONSOLE YOU FOUND THE SECRET MUJJAJAJA')
+    let displayVal = display.big.textContent 
+    displayVal = displayVal.split('')
+    displayVal.pop()
+    displayVal = display.join('')
+    display.big.textContent = displayVal
 }
