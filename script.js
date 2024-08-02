@@ -190,7 +190,7 @@ buttons.macro.operators.forEach((button) => {
         display.big.textContent = 0
       } else {
         console.log("4");
-        a = displayValue;
+        a = parseFloat(displayValue);
         operator = e.target.textContent;
         display.small.textContent = `${a} ${operator}`;
         display.big.textContent = 0;
